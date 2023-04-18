@@ -5,7 +5,7 @@ import Home from './pages/Home';
 import Store from './pages/Store';
 import Navbar from './components/Navbar';
 
-function App() {
+export default function App() {
   return (
     <>
       <Navbar />
@@ -19,5 +19,3 @@ function App() {
     </>
   );
 }
-
-export default App;
