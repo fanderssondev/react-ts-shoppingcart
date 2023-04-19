@@ -1,6 +1,7 @@
-import { Stack } from 'react-bootstrap';
+import { Button, Stack } from 'react-bootstrap';
 import { useShoppingCart } from '../context/ShoppingCartContext';
 import storeItems from '../data/items.json';
+import { formatCurrency } from '../utilities/formatCurrency';
 
 type CartItemProps = {
   id: number;
@@ -20,16 +21,26 @@ export default function CartItem({ id, quantity }: CartItemProps) {
         style={{ width: '125px', height: '75px', objectFit: 'cover' }}
       />
       <div className='me-auto'>
-        <div>
-          {item.name}{' '}
+        <div style={{ fontSize: '1.25rem' }}>
+          {item.name}
           {quantity > 1 && (
-            <span className='text-muted' style={{ fontSize: '0.65rem' }}>
-              x{quantity}
+            <span className='text-muted' style={{ fontSize: '0.75rem' }}>
+              &nbsp;x{quantity}
             </span>
-            // NOTE Video stopped here @53:40
           )}
         </div>
+        <div className='text-muted' style={{ fontSize: '0.85rem' }}>
+          {formatCurrency(item.price)}
+        </div>
       </div>
+      <div>{formatCurrency(item.price * quantity)}</div>
+      <Button
+        variant='outline-danger'
+        size='sm'
+        onClick={() => removeFromCart(item.id)}
+      >
+        &times;
+      </Button>
     </Stack>
   );
 }
